@@ -1,7 +1,8 @@
-#include "MetalTranslate.h"
-
 #include <iostream>
 #include <string>
+#include <chrono>
+#include <fmt/core.h>
+#include "MetalTranslate.h"
 
 void help() {
   std::cout << "Usage: metaltranslate <text> <source code> <target code>\n"
@@ -30,9 +31,11 @@ int main(int argc, char **argv) {
     targetCode = std::string(argv[3]);
   }
 
+  auto start = std::chrono::high_resolution_clock::now();
   std::string result = metalTranslate.Translate(q, sourceCode, targetCode);
-
-  std::cout << result << std::endl;
+  auto end = std::chrono::high_resolution_clock::now();
+  fmt::print("Translated Text: {}\n", result);
+  fmt::print("Elapsed time in milliseconds: {}ms\n", std::chrono::duration_cast<std::chrono::duration<double, std::milli>>(end - start).count());
 
   return 0;
 }

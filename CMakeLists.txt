@@ -15,6 +15,16 @@ FetchContent_Declare(OpenNMTTokenizer
 )
 FetchContent_MakeAvailable(OpenNMTTokenizer)
 
+FetchContent_Declare(fmt
+  GIT_REPOSITORY https://github.com/fmtlib/fmt.git
+  GIT_TAG master
+)
+FetchContent_MakeAvailable(fmt)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
 add_executable(metaltranslate src/main.cpp)
 
 set(TARGET_H
@@ -24,5 +34,5 @@ set(TARGET_H
 target_sources(metaltranslate PRIVATE src/MetalTranslate.cpp)
 
 target_link_libraries(metaltranslate ctranslate2)
-
 target_link_libraries(metaltranslate OpenNMTTokenizer)
+target_link_libraries(metaltranslate fmt::fmt)
