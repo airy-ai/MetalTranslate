@@ -33,6 +33,6 @@ set(TARGET_H
 
 target_sources(metaltranslate PRIVATE src/MetalTranslate.cpp)
 
+target_link_libraries(metaltranslate fmt::fmt)
 target_link_libraries(metaltranslate ctranslate2)
 target_link_libraries(metaltranslate OpenNMTTokenizer)
-target_link_libraries(metaltranslate fmt::fmt)

@@ -1,15 +1,17 @@
 #include <string>
-
-#include "MetalTranslateConfig.h"
+#include <ctranslate2/translator_pool.h>
+#include <onmt/Tokenizer.h>
 
 namespace MetalTranslate {
 class MetalTranslate {
 public:
-  MetalTranslate(MetalTranslateConfig config);
-  std::string Translate(std::string source, std::string source_code,
-                        std::string target_code);
+  MetalTranslate();
+  ~MetalTranslate();
+  std::string Translate(const std::string& text, const std::string& src_lang, const std::string& tgt_lang);
 
 private:
-  MetalTranslateConfig _config;
+  std::string model_path = "model_repo/translate-fairseq_m2m_100_418M/";
+  onmt::Tokenizer *tokenizer;
+  ctranslate2::TranslatorPool *translator;
 };
 } // namespace MetalTranslate
